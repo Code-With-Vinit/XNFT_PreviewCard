@@ -1,0 +1,394 @@
+/* ===================================
+   CSS CUSTOM PROPERTIES
+   =================================== */
+:root {
+    /* Colors - Premium NFT Marketplace Palette */
+    --color-primary: hsl(215, 51%, 70%);
+    --color-cyan: hsl(178, 100%, 50%);
+    --color-white: hsl(0, 0%, 100%);
+    
+    /* Dark theme */
+    --color-bg-main: hsl(217, 54%, 11%);
+    --color-bg-card: hsl(216, 50%, 16%);
+    --color-line: hsl(215, 32%, 27%);
+    
+    /* Typography */
+    --font-primary: 'Outfit', sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    
+    /* Border radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-lg: 1rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--color-primary);
+    background-color: var(--color-bg-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-md);
+    position: relative;
+}
+
+/* Atmospheric background effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, hsla(178, 100%, 50%, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, hsla(215, 51%, 70%, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===================================
+   CARD COMPONENT
+   =================================== */
+.card {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    max-width: 350px;
+    width: 100%;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    animation: cardEntrance 0.6s ease backwards;
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 35px 60px -15px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* ===================================
+   CARD IMAGE & HOVER EFFECT
+   =================================== */
+.card__images {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: var(--spacing-md);
+}
+
+.card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-slow);
+}
+
+.card__images:hover .card__image {
+    transform: scale(1.05);
+}
+
+.card__images-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(178, 100%, 50%, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-medium), background-color var(--transition-medium);
+    border-radius: var(--radius-md);
+}
+
+.card__images-layer svg {
+    transform: scale(0.8);
+    transition: transform var(--transition-medium);
+}
+
+.card__images:hover .card__images-layer {
+    opacity: 1;
+    background-color: hsla(178, 100%, 50%, 0.5);
+}
+
+.card__images:hover .card__images-layer svg {
+    transform: scale(1);
+}
+
+/* ===================================
+   CARD CONTENT
+   =================================== */
+.card__content {
+    animation: contentFadeIn 0.8s ease 0.2s backwards;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card__title {
+    font-size: 1.375rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    line-height: 1.2;
+}
+
+.card__title:hover {
+    color: var(--color-cyan);
+}
+
+.card__description {
+    font-size: 1rem;
+    font-weight: var(--font-weight-light);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.65;
+}
+
+/* ===================================
+   TIME & PRICE INFO
+   =================================== */
+.card__time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-line);
+}
+
+.card__time-left,
+.card__time-right {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.card__time-left {
+    color: var(--color-cyan);
+    font-weight: var(--font-weight-semibold);
+}
+
+.card__time-left svg {
+    width: 11px;
+    height: 18px;
+}
+
+.card__time-right {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-normal);
+}
+
+.card__time-right svg {
+    width: 17px;
+    height: 17px;
+}
+
+.card__time-left span,
+.card__time-right span {
+    font-size: 0.9375rem;
+}
+
+/* ===================================
+   CREATOR INFO
+   =================================== */
+.card__creator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.card__creator-avatar {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: 1px solid var(--color-white);
+    transition: box-shadow var(--transition-fast);
+}
+
+.card__creator:hover .card__creator-avatar {
+    box-shadow: 0 0 0 2px var(--color-white);
+}
+
+.card__creator-text {
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-normal);
+    color: var(--color-primary);
+}
+
+.card__creator-name {
+    color: var(--color-white);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.card__creator-name:hover {
+    color: var(--color-cyan);
+}
+
+/* ===================================
+   ATTRIBUTION / FOOTER
+   =================================== */
+.attribution {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--spacing-lg);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    animation: attributionFadeIn 1s ease 0.5s backwards;
+}
+
+@keyframes attributionFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.attribution a {
+    color: var(--color-cyan);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.attribution a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-cyan);
+    transition: width var(--transition-fast);
+}
+
+.attribution a:hover {
+    color: var(--color-white);
+}
+
+.attribution a:hover::after {
+    width: 100%;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 375px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+    
+    .card {
+        max-width: 100%;
+        padding: var(--spacing-sm);
+    }
+    
+    .card__title {
+        font-size: 1.25rem;
+    }
+    
+    .card__description {
+        font-size: 0.9375rem;
+    }
+    
+    .card__time-left span,
+    .card__time-right span {
+        font-size: 0.875rem;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 768px) {
+    .card {
+        max-width: 400px;
+    }
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.card__title:focus,
+.card__creator-name:focus,
+.attribution a:focus {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.card__images:focus-within {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 4px;
+    border-radius: var(--radius-md);
+}
