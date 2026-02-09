@@ -185,7 +185,7 @@ body::before {
     margin-bottom: var(--spacing-sm);
 }
 
-.card__title h1 {
+.card__title  {
     font-size: 1.375rem;
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
@@ -194,7 +194,7 @@ body::before {
     line-height: 1.2;
 }
 
-.card__title h1:hover {
+.card__title:hover {
     color: var(--color-cyan);
 }
 
